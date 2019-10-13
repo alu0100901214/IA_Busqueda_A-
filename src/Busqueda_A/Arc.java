@@ -32,5 +32,10 @@ public class Arc {
 	public void setEnd(Node end) { end_ = end; }
 	public void setCost(double cost) { cost_ = cost; }
 	
-	
+	public String toString() {
+		String cad = "";
+		cad += start_.getVal() + " --- " + end_.getVal() + " ( " + cost_ + " )\n";
+
+		return cad;
+	}
 }

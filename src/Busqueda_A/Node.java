@@ -29,4 +29,13 @@ public class Node {
 	public void setVal_(int val) { val_ = val; }
 	public void addArc(Arc arc) { arches_.add(arc); }
 	
+	public String toString() {
+		String cad="";
+		for (int i = 0; i < arches_.size(); i++) {
+			cad += arches_.get(i).toString();
+		}
+
+		return cad;
+	}
+	
 }

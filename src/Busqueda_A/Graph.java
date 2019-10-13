@@ -35,7 +35,7 @@ public class Graph {
 		int b = a+1;
 		
 		while((cad = br.readLine()) != null) {
-			if(cad != "-1") {
+			if(cad != "-1") {	// MIRAR
 				Arc auxArc = new Arc();
 				auxArc.setCost(Double.parseDouble(cad));
 				auxArc.setStart(nodes_.get(a));
@@ -61,6 +61,11 @@ public class Graph {
 	public void addNode(Node node) { nodes_.add(node); }
 	
 	public String toString() {
-		return "HOLA";
+		String cad="";
+		for (int i = 0; i < nodes_.size(); i++) {
+			cad += nodes_.get(i).toString();
+		}
+		
+		return cad;
 	}
 }
