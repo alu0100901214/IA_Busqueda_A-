@@ -13,7 +13,9 @@ import java.util.ArrayList;
 public class Node {
 	
 	private int val_;
-	private ArrayList<Integer> arches_ = new ArrayList<Integer>(); // Cambiar a ARCOS
+	private ArrayList<Arc> arches_ = new ArrayList<Arc>(); // Cambiar a ARCOS
+	
+	public Node() {}
 	
 	public Node(int val) {
 		val_ = val;
@@ -21,11 +23,10 @@ public class Node {
 	
 	// Getters
 	public int getVal() { return val_; }
-	public ArrayList<Integer> getArches() { return arches_; }
+	public ArrayList<Arc> getArches() { return arches_; }
 	
 	// Setters
 	public void setVal_(int val) { val_ = val; }
-	public void addArc(int arc) {
-		arches_.add(arc);
-	}
+	public void addArc(Arc arc) { arches_.add(arc); }
+	
 }
