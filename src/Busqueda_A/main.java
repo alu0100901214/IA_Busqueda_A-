@@ -11,7 +11,7 @@ public class main {
 	
 	public static void main(String[] args) throws IOException{
 	 	
-		System.out.println("ja");
+		System.out.println("\nGRAFO:\n");
 		File archive = new File(args[0]);
 		Graph graph = new Graph(archive);
 		System.out.println(graph);

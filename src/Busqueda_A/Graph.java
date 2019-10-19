@@ -35,7 +35,7 @@ public class Graph {
 		int b = a+1;
 		
 		while((cad = br.readLine()) != null) {
-			if(cad != "-1") {	// MIRAR
+			if(Double.parseDouble(cad) != -1) {	
 				Arc auxArc = new Arc();
 				auxArc.setCost(Double.parseDouble(cad));
 				auxArc.setStart(nodes_.get(a));
