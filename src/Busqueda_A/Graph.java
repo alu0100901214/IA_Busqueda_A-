@@ -50,7 +50,6 @@ public class Graph {
 				a++;
 				b=a+1;
 			}
-				
 		}
 	}
 	
