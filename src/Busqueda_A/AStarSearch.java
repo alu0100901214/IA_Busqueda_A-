@@ -23,7 +23,10 @@ public class AStarSearch {
 		tree_ = new Tree(nodeStart, nodeEnd);
 	}
 	
-	// Getters
+	public void aStar() {
+		
+	}
 	
+	// Getters
 	public Graph getGraph() { return graph_; }
 }
