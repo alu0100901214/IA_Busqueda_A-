@@ -9,10 +9,10 @@ package Busqueda_A;
  */
 public class Tree {
 	
-	private Leaf root_;
+	private Node root_;
 	private Node finalNode_;
 	
-	public Tree(Leaf root, Node finalNode) {
+	public Tree(Node root, Node finalNode) {
 		root_ = root;
 		finalNode_ = finalNode;
 	}

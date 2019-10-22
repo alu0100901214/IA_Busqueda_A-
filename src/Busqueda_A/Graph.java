@@ -74,6 +74,7 @@ public class Graph {
 	
 	//Getters
 	public ArrayList<Node> getNodes() { return nodes_; }
+	public Node getNode(int i) { return nodes_.get(i); }
 	
 	// Setters 
 	public void addNode(Node node) { nodes_.add(node); }
