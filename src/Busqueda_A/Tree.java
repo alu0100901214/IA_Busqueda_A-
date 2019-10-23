@@ -9,12 +9,23 @@ package Busqueda_A;
  */
 public class Tree {
 	
-	private Node root_;
+	private TreeNode root_;
+	private int maxLevel_;
 	private Node finalNode_;
 	
+	
 	public Tree(Node root, Node finalNode) {
-		root_ = root;
+		TreeNode tn= new TreeNode(root, 1);
+		root_ = tn;
+		maxLevel_ = 1;
 		finalNode_ = finalNode;
+	}
+	
+	// Setters
+	public void addNode(Node n, int level) {
+		for (int i = 0; i < maxLevel_ ; i++) {
+			
+		}
 	}
 	
 	

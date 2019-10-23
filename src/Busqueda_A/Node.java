@@ -14,7 +14,7 @@ public class Node {
 	
 	private int val_;
 	private double heuristic_;
-	private ArrayList<Arc> arches_ = new ArrayList<Arc>(); // Cambiar a ARCOS
+	private ArrayList<Arc> arches_ = new ArrayList<Arc>();
 	
 	public Node() {}
 	
