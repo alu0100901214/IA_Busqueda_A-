@@ -15,6 +15,7 @@ public class AStarSearch {
 	Graph graph_;
 	Tree tree_;
 	
+	
 	public AStarSearch(File archive1, File archive2, int start, int end) throws IOException{
 		graph_ = new Graph(archive1, archive2);
 		Node nodeStart = graph_.getNode(start-1);

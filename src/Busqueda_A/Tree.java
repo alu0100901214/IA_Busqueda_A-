@@ -3,6 +3,8 @@
  */
 package Busqueda_A;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 /**
  * @author Sergio González Guerra
  *
@@ -22,11 +24,18 @@ public class Tree {
 	}
 	
 	// Setters
-	public void addNode(Node n, int level) {
-		for (int i = 0; i < maxLevel_ ; i++) {
-			
+	public void addNode(Node n, Path p) {
+		TreeNode auxTreeNode = root_;
+		Node auxP;
+		for (int i = 0; i < p.getPathSize(); i++) {
+			auxP = p.getPathNode(i);
+			for (int j = 0; j < auxTreeNode.getSucesorSize() ; j++) {
+				if( auxP.getVal() == auxTreeNode.getSucesorTreeNode(j).getNode().getVal() ) {
+					auxTreeNode = auxTreeNode.getSucesorTreeNode(j);
+				}
+			}
 		}
+		auxTreeNode.addNodeSucesor(n);
 	}
-	
 	
 }

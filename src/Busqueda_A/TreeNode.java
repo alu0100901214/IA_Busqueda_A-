@@ -20,7 +20,16 @@ public class TreeNode {
 		level_ = level;
 	}
 	
+	// Getters
+	public Node getNode() { return node_; }
+	public TreeNode getSucesorTreeNode(int i) { return sucesors_.get(i); }
+	public int getSucesorSize() { return sucesors_.size(); }
+	
 	// Setters
-	public void addSucesor(TreeNode tn) { sucesors_.add(tn); } 
+	public void addTreeNodeSucesor(TreeNode tn) { sucesors_.add(tn); } 
+	public void addNodeSucesor(Node n) { 
+		TreeNode tn = new TreeNode(n, level_+1);
+		sucesors_.add(tn); 
+	} 
 	
 }
