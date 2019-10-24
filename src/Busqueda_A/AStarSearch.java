@@ -22,6 +22,14 @@ public class AStarSearch {
 		Node nodeEnd = graph_.getNode(end-1);
 		// System.out.println(nodeStart.getVal() + " :::: " + nodeEnd.getVal());
 		tree_ = new Tree(nodeStart, nodeEnd);
+		
+		// PRUEBA
+		Path path = new Path(200);
+		path.addNode(graph_.getNode(0));
+		System.out.println(tree_);
+		tree_.addNode(graph_.getNode(3), path);
+		System.out.println(tree_);
+		// PRUEBA
 	}
 	
 	public void aStar() {

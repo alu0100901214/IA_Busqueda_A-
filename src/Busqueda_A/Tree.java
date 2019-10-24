@@ -3,8 +3,6 @@
  */
 package Busqueda_A;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
 /**
  * @author Sergio González Guerra
  *
@@ -38,4 +36,10 @@ public class Tree {
 		auxTreeNode.addNodeSucesor(n);
 	}
 	
+	public String toString() {
+		String cad="";
+		cad += root_.toString();
+		
+		return cad;
+	}
 }

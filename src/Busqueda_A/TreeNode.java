@@ -32,4 +32,15 @@ public class TreeNode {
 		sucesors_.add(tn); 
 	} 
 	
+	public String toString() {
+		String cad="";
+		cad += node_.getVal() + "\n";
+		if(sucesors_.size() != 0) {
+			for (int i = 0; i < sucesors_.size() ; i++) {
+				cad += sucesors_.get(i).toString();
+			}
+		}
+		return cad;
+	}
+	
 }
