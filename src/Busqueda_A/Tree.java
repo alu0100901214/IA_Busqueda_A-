@@ -21,6 +21,9 @@ public class Tree {
 		finalNode_ = finalNode;
 	}
 	
+	// Getters
+	public Node getRootNode() { return root_.getNode(); }
+	
 	// Setters
 	public void addNode(Node n, Path p) {
 		TreeNode auxTreeNode = root_;

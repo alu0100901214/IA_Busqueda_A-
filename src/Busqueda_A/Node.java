@@ -24,9 +24,9 @@ public class Node {
 	
 	// Getters
 	public int getVal() { return val_; }
-	public ArrayList<Arc> getArches() { return arches_; }
+	public Arc getArche(int index) { return arches_.get(index); }
 	public double getHeuristic() { return heuristic_; }
-	
+	public int getArchesSize() { return arches_.size(); }
 	// Setters
 	public void setVal(int val) { val_ = val; }
 	public void addArc(Arc arc) { arches_.add(arc); }
