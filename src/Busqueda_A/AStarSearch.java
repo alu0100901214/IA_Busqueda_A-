@@ -34,6 +34,7 @@ public class AStarSearch {
 		possiblePaths_.add(path);
 		generated_.add(nodeStart);
 		
+		aStar();
 		
 		// PRUEBA
 //		Path path = new Path(200);
@@ -45,34 +46,51 @@ public class AStarSearch {
 	}
 	
 	public void aStar() {
-		Path path = new Path(1);
-		// Bucle
-		while(generated_.size() != 0) {
-			if(path.getPathNode(path.getPathSize()-1) == nodeEnd_) {
-					System.out.println("Encontrado");
-			}else {
-				System.out.println("No Encontrado");
-				// Generar hijos
-				for (int i = 0; i < possiblePaths_.size() ; i++) {
-					Node auxNode = possiblePaths_.get(i).getPathNode(path.getPathSize()-1);
-					for (int j = 0; j < auxNode.getArchesSize(); j++) {
-						
-					}
-				}
-				// Dar el nodo por inspeccionado			
-			}
+		System.out.println("Antes: ");
+		for (int i = 0; i < possiblePaths_.size(); i++) {
+			System.out.println(possiblePaths_.get(i));
 		}
+		expandNode(possiblePaths_.get(0));
+		
+		System.out.println("Después: ");
+		for (int i = 0; i < possiblePaths_.size(); i++) {
+			System.out.println(possiblePaths_.get(i));
+		}
+		
+//		Path path = new Path(1);
+//		// Bucle
+//		while(generated_.size() != 0) {
+//			if(path.getPathNode(path.getPathSize()-1) == nodeEnd_) {
+//					System.out.println("Encontrado");
+//			}else {
+//				System.out.println("No Encontrado");
+//				// Generar hijos
+//				for (int i = 0; i < possiblePaths_.size() ; i++) {
+//					Node auxNode = possiblePaths_.get(i).getPathNode(path.getPathSize()-1);
+//					for (int j = 0; j < auxNode.getArchesSize(); j++) {
+//						
+//					}
+//				}
+//				// Dar el nodo por inspeccionado			
+//			}
+//		}
 	}
 	
-	private void generateNodes(Path path) {
-		Path auxPath;
+	private void expandNode(Path path) {
+		
 		Node lastPathNode = path.getPathNode(path.getPathSize()-1);
+		Path auxPath = new Path(path);
+		
 		for (int i = 0; i < lastPathNode.getArchesSize() ; i++) {
 			// Crear 2 nuevos path con los nodos que correspondan
-			auxPath = path;
 			auxPath.addNode(lastPathNode.getArche(i).getEnd());
 			// Añadir la suma de todos los arcos.
+			auxPath.setTotalCost(auxPath.getTotalCost() + lastPathNode.getArche(i).getCost());
+			possiblePaths_.add(auxPath);
+			
+			auxPath = new Path(path);
 		}
+		possiblePaths_.remove(path);
 	}
 	
 	// Getters

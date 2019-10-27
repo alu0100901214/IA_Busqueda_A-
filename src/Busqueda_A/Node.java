@@ -18,6 +18,14 @@ public class Node {
 	
 	public Node() {}
 	
+	public Node(Node another) {
+		val_ = another.val_;
+		heuristic_ = another.heuristic_;
+		for (int i = 0; i < arches_.size(); i++) {
+			arches_.add(new Arc(another.arches_.get(i)));
+		}
+	}
+	
 	public Node(int val) {
 		val_ = val;
 	}
@@ -27,6 +35,7 @@ public class Node {
 	public Arc getArche(int index) { return arches_.get(index); }
 	public double getHeuristic() { return heuristic_; }
 	public int getArchesSize() { return arches_.size(); }
+	
 	// Setters
 	public void setVal(int val) { val_ = val; }
 	public void addArc(Arc arc) { arches_.add(arc); }

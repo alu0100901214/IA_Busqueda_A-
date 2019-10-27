@@ -15,6 +15,12 @@ public class Arc {
 	
 	public Arc() {}
 	
+	public Arc(Arc another) {
+		cost_ = another.cost_;
+		start_ = new Node(another.start_);
+		end_ = new Node(another.end_);
+	}
+	
 	public Arc(Node start, Node end, double cost) {
 		start_ = start;
 		end_ = end;
