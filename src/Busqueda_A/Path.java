@@ -31,6 +31,7 @@ public class Path {
 	public double getTotalCost() { return totalCost_; }
 	public Node getPathNode(int i) { return nodes_.get(i); }
 	public int getPathSize() { return nodes_.size(); }
+	public Node getLastPathNode() { return nodes_.get(getPathSize()-1); }
 	public ArrayList<Node> getNodes() { return nodes_; }
 	
 	// Setters

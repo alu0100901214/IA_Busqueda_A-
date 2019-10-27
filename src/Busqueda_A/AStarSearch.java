@@ -19,7 +19,7 @@ public class AStarSearch {
 	ArrayList<Path> possiblePaths_ = new ArrayList<Path>();
 	ArrayList<Node> generated_ = new ArrayList<Node>();
 	ArrayList<Node> inspected_ = new ArrayList<Node>();
-	
+	private static final double Max = 9999999;
 	
 	public AStarSearch(File archive1, File archive2, int start, int end) throws IOException{
 		
@@ -46,16 +46,46 @@ public class AStarSearch {
 	}
 	
 	public void aStar() {
-		System.out.println("Antes: ");
-		for (int i = 0; i < possiblePaths_.size(); i++) {
-			System.out.println(possiblePaths_.get(i));
+		double minCost = Max;
+		int index = 0;
+		int pruebaIndex = 0;
+		// BUCLE
+		while(pruebaIndex < 4) {
+			for (int i = 0; i < possiblePaths_.size(); i++) {
+				if((possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic()) < minCost) {
+					minCost = (possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic());
+					index = i;
+				}
+				
+			}
+			System.out.println("MIN: " + minCost);
+			expandNode(possiblePaths_.get(index));
+			
+			minCost = Max;
+			index = 0;
+			
+			for (int i = 0; i < possiblePaths_.size(); i++) {
+				System.out.println(possiblePaths_.get(i));
+			}
+			pruebaIndex++;
 		}
-		expandNode(possiblePaths_.get(0));
+		//BUCLE
 		
-		System.out.println("Después: ");
-		for (int i = 0; i < possiblePaths_.size(); i++) {
-			System.out.println(possiblePaths_.get(i));
-		}
+		
+		
+//		expandNode(possiblePaths_.get(0));
+//		
+//		System.out.println("Después: ");
+//		for (int i = 0; i < possiblePaths_.size(); i++) {
+//			System.out.println(possiblePaths_.get(i));
+//		}
+//		
+//		expandNode(possiblePaths_.get(0));
+//		
+//		System.out.println("Después Despues: ");
+//		for (int i = 0; i < possiblePaths_.size(); i++) {
+//			System.out.println(possiblePaths_.get(i));
+//		}
 		
 //		Path path = new Path(1);
 //		// Bucle
@@ -78,7 +108,7 @@ public class AStarSearch {
 	
 	private void expandNode(Path path) {
 		
-		Node lastPathNode = path.getPathNode(path.getPathSize()-1);
+		Node lastPathNode = path.getLastPathNode();
 		Path auxPath = new Path(path);
 		
 		for (int i = 0; i < lastPathNode.getArchesSize() ; i++) {
