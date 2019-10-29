@@ -15,6 +15,7 @@ public class AStarSearch {
 	
 	Graph graph_;
 	Tree tree_;
+	Node nodeStart_;
 	Node nodeEnd_;
 	ArrayList<Path> possiblePaths_ = new ArrayList<Path>();
 	ArrayList<Path> solutions_ = new ArrayList<Path>();
@@ -25,14 +26,14 @@ public class AStarSearch {
 	public AStarSearch(File archive1, File archive2, int start, int end) throws IOException{
 		
 		graph_ = new Graph(archive1, archive2);
-		Node nodeStart = graph_.getNode(start-1);
+		nodeStart_ = graph_.getNode(start-1);
 		nodeEnd_ = graph_.getNode(end-1);
-		tree_ = new Tree(nodeStart, nodeEnd_);
+		tree_ = new Tree(nodeStart_, nodeEnd_);
 		
 		Path path = new Path(0);
-		path.addNode(nodeStart);
+		path.addNode(nodeStart_);
 		possiblePaths_.add(path);
-		generated_.add(nodeStart);
+		generated_.add(nodeStart_);
 		
 		aStar();
 	}
@@ -40,37 +41,35 @@ public class AStarSearch {
 	public void aStar() {
 		double minCost = Max;
 		int index = 0;
-		int pruebaIndex = 0;
-		// BUCLE
-		while(pruebaIndex < 5) {
-			
+		
+		while(!allPathsClosed()) {
+			// Mira si alguno de los caminos es una posible solución.
+			System.out.println(" ------------------------- ");
 			for (int i = 0; i < possiblePaths_.size(); i++) {
-				//System.out.println(possiblePaths_.get(i));
+				System.out.println(possiblePaths_.get(i));
 				if(possiblePaths_.get(i).getLastPathNode().getVal() == nodeEnd_.getVal()) {
 					if (!solutions_.contains(possiblePaths_.get(i)))
 						solutions_.add(possiblePaths_.get(i));
 				}
 			}
 			
-			
+			// Mira de los sucesores de los caminos abiertos cual es el de mínimo coste y lo expande.
 			for (int i = 0; i < possiblePaths_.size(); i++) {
-				if((possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic()) < minCost) {
-					minCost = (possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic());
-					index = i;
+				if(!possiblePaths_.get(i).getClosed()) {
+					if((possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic()) < minCost) {
+						minCost = (possiblePaths_.get(i).getTotalCost() + possiblePaths_.get(i).getLastPathNode().getHeuristic());
+						index = i;
+					}
 				}
-				
 			}
-			//System.out.println("MIN: " + minCost);
 			expandNode(possiblePaths_.get(index));
-			
 			minCost = Max;
 			index = 0;
-			
-
-			pruebaIndex++;
-			
+			for (int i = 0; i < possiblePaths_.size(); i++) {
+				possiblePaths_.get(i).closeThePath(nodeStart_, nodeEnd_);
+			}
 		}
-		//BUCLE
+		
 		System.out.println("SOLUCIONES: ");
 		for (int i = 0; i < solutions_.size(); i++) {
 			System.out.println(solutions_.get(i));
@@ -92,6 +91,15 @@ public class AStarSearch {
 			auxPath = new Path(path);
 		}
 		possiblePaths_.remove(path);
+	}
+	
+	private boolean allPathsClosed() {
+		boolean check = true;
+		for (int i = 0; i < possiblePaths_.size(); i++) {
+			if(!possiblePaths_.get(i).getClosed())
+				check = false;
+		}
+		return check;
 	}
 	
 	// Getters
