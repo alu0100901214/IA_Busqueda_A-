@@ -52,7 +52,6 @@ public class AStarSearch {
 						solutions_.add(possiblePaths_.get(i));
 				}
 			}
-			
 			// Mira de los sucesores de los caminos abiertos cual es el de mínimo coste y lo expande.
 			for (int i = 0; i < possiblePaths_.size(); i++) {
 				if(!possiblePaths_.get(i).getClosed()) {
@@ -70,9 +69,18 @@ public class AStarSearch {
 			}
 		}
 		
+		// BORRAR
 		System.out.println("SOLUCIONES: ");
 		for (int i = 0; i < solutions_.size(); i++) {
 			System.out.println(solutions_.get(i));
+		}
+		System.out.println("NODOS GENERADOS ( " + generated_.size() + " ): ");
+		for (int i = 0; i < generated_.size(); i++) {
+			System.out.println(" [ " + generated_.get(i).getVal() + " ] ");
+		}
+		System.out.println("NODOS INSPECCIONADOS ( " + inspected_.size() + " ): ");
+		for (int i = 0; i < inspected_.size(); i++) {
+			System.out.println(" [ " + inspected_.get(i).getVal() + " ] ");
 		}
 	}
 	
@@ -85,8 +93,6 @@ public class AStarSearch {
 		
 		for (int i = 0; i < lastPathNode.getArchesSize() ; i++) {
 			// Comprobamos que el sucesor que queremos añadir no se encuentre ya en el camino.
-//			System.out.println(path.toString() + " ___ " + lastPathNode.getArche(i).getEnd().getVal());
-//			System.out.println("ES: " + repeatedNodeInPath(path, lastPathNode.getArche(i).getEnd()));
 			if(!repeatedNodeInPath(path, lastPathNode.getArche(i).getEnd())) {
 				// Crear los nuevos path con los nodos que correspondan
 				auxPath.addNode(lastPathNode.getArche(i).getEnd());
@@ -94,9 +100,12 @@ public class AStarSearch {
 				auxPath.setTotalCost(auxPath.getTotalCost() + lastPathNode.getArche(i).getCost());
 				possiblePaths_.add(auxPath);
 				
+				// Añadir el nodo sucesor a la lista de nodos generados
+				generated_.add(lastPathNode.getArche(i).getEnd());
 				auxPath = new Path(path);
 			}
 		}
+		inspected_.add(path.getLastPathNode());
 		possiblePaths_.remove(path);
 	}
 	
