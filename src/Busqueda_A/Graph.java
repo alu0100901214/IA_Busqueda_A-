@@ -42,6 +42,11 @@ public class Graph {
 				auxArc.setEnd(nodes_.get(b));
 				
 				nodes_.get(a).addArc(auxArc);
+				auxArc = new Arc();
+				auxArc.setCost(Double.parseDouble(cad));
+				auxArc.setStart(nodes_.get(b));
+				auxArc.setEnd(nodes_.get(a));
+				nodes_.get(b).addArc(auxArc);
 			}
 			
 			if(b<n-1) {

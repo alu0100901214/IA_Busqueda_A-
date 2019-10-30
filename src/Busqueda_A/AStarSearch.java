@@ -79,18 +79,35 @@ public class AStarSearch {
 	private void expandNode(Path path) {
 		
 		Node lastPathNode = path.getLastPathNode();
+
+		
 		Path auxPath = new Path(path);
 		
 		for (int i = 0; i < lastPathNode.getArchesSize() ; i++) {
-			// Crear los nuevos path con los nodos que correspondan
-			auxPath.addNode(lastPathNode.getArche(i).getEnd());
-			// Añadir la suma de los arcos de cada nodo añadido.
-			auxPath.setTotalCost(auxPath.getTotalCost() + lastPathNode.getArche(i).getCost());
-			possiblePaths_.add(auxPath);
-			
-			auxPath = new Path(path);
+			// Comprobamos que el sucesor que queremos añadir no se encuentre ya en el camino.
+//			System.out.println(path.toString() + " ___ " + lastPathNode.getArche(i).getEnd().getVal());
+//			System.out.println("ES: " + repeatedNodeInPath(path, lastPathNode.getArche(i).getEnd()));
+			if(!repeatedNodeInPath(path, lastPathNode.getArche(i).getEnd())) {
+				// Crear los nuevos path con los nodos que correspondan
+				auxPath.addNode(lastPathNode.getArche(i).getEnd());
+				// Añadir la suma de los arcos de cada nodo añadido.
+				auxPath.setTotalCost(auxPath.getTotalCost() + lastPathNode.getArche(i).getCost());
+				possiblePaths_.add(auxPath);
+				
+				auxPath = new Path(path);
+			}
 		}
 		possiblePaths_.remove(path);
+	}
+	
+	private boolean repeatedNodeInPath(Path path, Node n) {
+		boolean check = false;
+		for (int i = 0; i < path.getPathSize(); i++) {
+			if(path.getPathNode(i).getVal() == n.getVal()) {
+				check = true;
+			}
+		}
+		return check;
 	}
 	
 	private boolean allPathsClosed() {
