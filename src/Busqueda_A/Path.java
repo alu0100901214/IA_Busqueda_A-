@@ -47,7 +47,7 @@ public class Path {
 	// Cierra el camino en caso de que se cumpla que su último nodo sea el
 	// del comienzo, el del final o no tenga ningún sucesor.
 	public void closeThePath(Node startNode, Node endNode){
-		if(nodes_.size() <= 0) {
+		if(( nodes_.get(nodes_.size()-1).getArchesSize() - sucesorsInPath() ) <= 0) {
 			closed_ = true;
 		}
 		
@@ -60,9 +60,22 @@ public class Path {
 		}
 	}
 	
+	public int sucesorsInPath() {
+		int count = 0;
+		for (int i = 0; i < nodes_.size(); i++) {
+			for (int j = 0; j < getLastPathNode().getArchesSize() ; j++) {
+				if(nodes_.get(i).getVal() == getLastPathNode().getArche(j).getEnd().getVal()) {
+					count++;
+				}
+			}
+		}
+		return count;
+	}
+	
 	public String toString() {
 		String cad = "";
 		cad += "TotalCost: " + totalCost_ + "\n";
+		cad += closed_ + " \n ";
 		for (int i = 0; i < nodes_.size(); i++) {
 			cad += nodes_.get(i).getVal() + " - ";
 		}

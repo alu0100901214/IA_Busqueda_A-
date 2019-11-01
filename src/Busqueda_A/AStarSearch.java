@@ -19,6 +19,7 @@ public class AStarSearch {
 	Node nodeEnd_;
 	ArrayList<Path> possiblePaths_ = new ArrayList<Path>();
 	ArrayList<Path> solutions_ = new ArrayList<Path>();
+	ArrayList<Path> minimumCostSolutions_ = new ArrayList<Path>();
 	ArrayList<Node> generated_ = new ArrayList<Node>();
 	ArrayList<Node> inspected_ = new ArrayList<Node>();
 	private static final double Max = 9999999;
@@ -43,15 +44,6 @@ public class AStarSearch {
 		int index = 0;
 		
 		while(!allPathsClosed()) {
-			// Mira si alguno de los caminos es una posible solución.
-			System.out.println(" ------------------------- ");
-			for (int i = 0; i < possiblePaths_.size(); i++) {
-				System.out.println(possiblePaths_.get(i));
-				if(possiblePaths_.get(i).getLastPathNode().getVal() == nodeEnd_.getVal()) {
-					if (!solutions_.contains(possiblePaths_.get(i)))
-						solutions_.add(possiblePaths_.get(i));
-				}
-			}
 			// Mira de los sucesores de los caminos abiertos cual es el de mínimo coste y lo expande.
 			for (int i = 0; i < possiblePaths_.size(); i++) {
 				if(!possiblePaths_.get(i).getClosed()) {
@@ -67,28 +59,33 @@ public class AStarSearch {
 			for (int i = 0; i < possiblePaths_.size(); i++) {
 				possiblePaths_.get(i).closeThePath(nodeStart_, nodeEnd_);
 			}
+			
+			// Mira si alguno de los caminos es una posible solución.
+			for (int i = 0; i < possiblePaths_.size(); i++) {
+				if(possiblePaths_.get(i).getLastPathNode().getVal() == nodeEnd_.getVal()) {
+					if (!solutions_.contains(possiblePaths_.get(i)))
+						solutions_.add(possiblePaths_.get(i));
+				}
+			}	
 		}
 		
-		// BORRAR
-		System.out.println("SOLUCIONES: ");
+		// De todas las soluciones, busca la de coste mínimo.
+		minCost = Max;
+		for (int i = 0; i < solutions_.size() ; i++) {
+			if( solutions_.get(i).getTotalCost() < minCost) {
+				minCost = solutions_.get(i).getTotalCost();
+			}
+		}
 		for (int i = 0; i < solutions_.size(); i++) {
-			System.out.println(solutions_.get(i));
-		}
-		System.out.println("NODOS GENERADOS ( " + generated_.size() + " ): ");
-		for (int i = 0; i < generated_.size(); i++) {
-			System.out.println(" [ " + generated_.get(i).getVal() + " ] ");
-		}
-		System.out.println("NODOS INSPECCIONADOS ( " + inspected_.size() + " ): ");
-		for (int i = 0; i < inspected_.size(); i++) {
-			System.out.println(" [ " + inspected_.get(i).getVal() + " ] ");
-		}
+			if( solutions_.get(i).getTotalCost() == minCost) {
+				minimumCostSolutions_.add(solutions_.get(i));
+			}
+		}		
 	}
 	
 	private void expandNode(Path path) {
 		
 		Node lastPathNode = path.getLastPathNode();
-
-		
 		Path auxPath = new Path(path);
 		
 		for (int i = 0; i < lastPathNode.getArchesSize() ; i++) {
@@ -99,7 +96,6 @@ public class AStarSearch {
 				// Añadir la suma de los arcos de cada nodo añadido.
 				auxPath.setTotalCost(auxPath.getTotalCost() + lastPathNode.getArche(i).getCost());
 				possiblePaths_.add(auxPath);
-				
 				// Añadir el nodo sucesor a la lista de nodos generados
 				generated_.add(lastPathNode.getArche(i).getEnd());
 				auxPath = new Path(path);
