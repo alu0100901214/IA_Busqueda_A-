@@ -4,7 +4,9 @@
 package Busqueda_A;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 /**
@@ -122,6 +124,28 @@ public class AStarSearch {
 				check = false;
 		}
 		return check;
+	}
+	
+	public void writeResults() {
+		FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("results.txt");
+            pw = new PrintWriter(fichero);
+
+            pw.println(); // AQUI
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           if (null != fichero)
+              fichero.close();
+           } catch (Exception e2) {
+              e2.printStackTrace();
+           }
+        }
 	}
 	
 	// Getters

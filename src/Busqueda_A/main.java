@@ -26,7 +26,7 @@ public class main {
 		cad = sc.nextLine();
 		end = Integer.parseInt(cad);
 		AStarSearch as = new AStarSearch(archive1, archive2, start, end);
-		
+		as.writeResults();
 	}
 
 }
