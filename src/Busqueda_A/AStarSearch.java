@@ -133,9 +133,16 @@ public class AStarSearch {
         {
             fichero = new FileWriter("results.txt");
             pw = new PrintWriter(fichero);
-
-            pw.println(); // AQUI
-
+            
+            pw.println("Nº nodos: " + graph_.getNodes().size());
+            pw.println("Nº arcos: " + graph_.getNArches());
+            pw.println("Nodo inicial: " + nodeStart_.getVal());
+            pw.println("Nodo final: " + nodeEnd_.getVal());
+            pw.println("Camino minimo encontrado: " + minimumCostSolutions_.get(0));
+            pw.println("Coste minimo: " + minimumCostSolutions_.get(0).getTotalCost());
+            pw.println("Nº de nodos generados: " + generated_.size());
+            pw.println("Nº de nodos inspeccionados: " + inspected_.size());
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

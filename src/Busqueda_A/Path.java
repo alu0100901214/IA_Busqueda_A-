@@ -74,12 +74,9 @@ public class Path {
 	
 	public String toString() {
 		String cad = "";
-		cad += "TotalCost: " + totalCost_ + "\n";
-		cad += closed_ + " \n ";
 		for (int i = 0; i < nodes_.size(); i++) {
 			cad += nodes_.get(i).getVal() + " - ";
 		}
-		cad+= "\n";
 		return cad;
 	}
 }

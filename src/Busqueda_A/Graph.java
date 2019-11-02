@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Graph {
 	
 	private ArrayList<Node> nodes_ = new ArrayList<Node>();
-	
+	private int nArches_;
 	public Graph(){}
 	
 	public Graph(File archive1, File archive2) throws IOException {
@@ -40,7 +40,7 @@ public class Graph {
 				auxArc.setCost(Double.parseDouble(cad));
 				auxArc.setStart(nodes_.get(a));
 				auxArc.setEnd(nodes_.get(b));
-				
+				nArches_++;
 				nodes_.get(a).addArc(auxArc);
 				auxArc = new Arc();
 				auxArc.setCost(Double.parseDouble(cad));
@@ -80,6 +80,7 @@ public class Graph {
 	//Getters
 	public ArrayList<Node> getNodes() { return nodes_; }
 	public Node getNode(int i) { return nodes_.get(i); }
+	public int getNArches() { return nArches_; } 
 	
 	// Setters 
 	public void addNode(Node node) { nodes_.add(node); }
