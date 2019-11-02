@@ -10,14 +10,16 @@ import java.util.ArrayList;
  * @author Sergio González Guerra
  *
  */
+// Clase que representa al Nodo de un Grafo.
 public class Node {
 	
-	private int val_;
-	private double heuristic_;
-	private ArrayList<Arc> arches_ = new ArrayList<Arc>();
+	private int val_;			// Identificador del nodo.
+	private double heuristic_;	// Heurística del nodo.
+	private ArrayList<Arc> arches_ = new ArrayList<Arc>();	// Lista de arcos sucesores del nodo.
 	
+	// Constructor vacío.
 	public Node() {}
-	
+	// Constructor de copia.
 	public Node(Node another) {
 		val_ = another.val_;
 		heuristic_ = another.heuristic_;
@@ -25,7 +27,7 @@ public class Node {
 			arches_.add(new Arc(another.arches_.get(i)));
 		}
 	}
-	
+	// Constructor principal.
 	public Node(int val) {
 		val_ = val;
 	}
@@ -41,12 +43,12 @@ public class Node {
 	public void addArc(Arc arc) { arches_.add(arc); }
 	public void setHeuristic(double heuristic) { heuristic_ = heuristic; }
 	
+	// Devuelve un String con el contenido de la clase.
 	public String toString() {
 		String cad="";
 		for (int i = 0; i < arches_.size(); i++) {
 			cad += arches_.get(i).toString();
 		}
-		
 		return cad;
 	}
 	

@@ -13,25 +13,27 @@ import java.util.ArrayList;
  * @author Sergio González Guerra
  *
  */
+// Clase principal que resuelve el algoritmo de busqueda A*
 public class AStarSearch {
 	
-	Graph graph_;
-	Tree tree_;
-	Node nodeStart_;
-	Node nodeEnd_;
-	ArrayList<Path> possiblePaths_ = new ArrayList<Path>();
-	ArrayList<Path> solutions_ = new ArrayList<Path>();
-	ArrayList<Path> minimumCostSolutions_ = new ArrayList<Path>();
-	ArrayList<Node> generated_ = new ArrayList<Node>();
-	ArrayList<Node> inspected_ = new ArrayList<Node>();
+	Graph graph_;	// Clase que representa a un Grafo
+	Node nodeStart_;	// Nodo inicial.
+	Node nodeEnd_;		// Nodo final.
+	
+	ArrayList<Path> possiblePaths_ = new ArrayList<Path>();			// Guarda todos los caminos posibles que se pueden recorrer.
+	ArrayList<Path> solutions_ = new ArrayList<Path>();				// Guarda todos los caminos posibles que representen una solución.
+	ArrayList<Path> minimumCostSolutions_ = new ArrayList<Path>();	// Guarda los caminos con una solución y de coste mínimo.
+	ArrayList<Node> generated_ = new ArrayList<Node>();				// Guarda todos los nodos que se van generando.
+	ArrayList<Node> inspected_ = new ArrayList<Node>();				// Guarda todos los nodos que han sido inspeccionados.
+	
 	private static final double Max = 9999999;
 	
+	// Constructor que inicializa todas las variables necesarias y comienza la busqueda A*.
 	public AStarSearch(File archive1, File archive2, int start, int end) throws IOException{
 		
 		graph_ = new Graph(archive1, archive2);
 		nodeStart_ = graph_.getNode(start-1);
 		nodeEnd_ = graph_.getNode(end-1);
-		tree_ = new Tree(nodeStart_, nodeEnd_);
 		
 		Path path = new Path(0);
 		path.addNode(nodeStart_);
@@ -40,11 +42,13 @@ public class AStarSearch {
 		
 		aStar();
 	}
-	
+	// Función encargada de ejecutar el algoritmo de búsqueda A*.
 	public void aStar() {
+		
 		double minCost = Max;
 		int index = 0;
 		
+		// El bucle no para hasta que se consideren todos los caminos como cerrados o sin salida.
 		while(!allPathsClosed()) {
 			// Mira de los sucesores de los caminos abiertos cual es el de mínimo coste y lo expande.
 			for (int i = 0; i < possiblePaths_.size(); i++) {
@@ -84,7 +88,7 @@ public class AStarSearch {
 			}
 		}		
 	}
-	
+	// Se encarga de expandir un nodo, abriendo a todos los posibles sucesores que este tenga.
 	private void expandNode(Path path) {
 		
 		Node lastPathNode = path.getLastPathNode();
@@ -106,7 +110,7 @@ public class AStarSearch {
 		inspected_.add(path.getLastPathNode());
 		possiblePaths_.remove(path);
 	}
-	
+	// Devuelve falso en caso de que no se encuentre el nodo 'n' en el camino.
 	private boolean repeatedNodeInPath(Path path, Node n) {
 		boolean check = false;
 		for (int i = 0; i < path.getPathSize(); i++) {
@@ -116,7 +120,7 @@ public class AStarSearch {
 		}
 		return check;
 	}
-	
+	// Comprueba que todos los caminos esten cerrador en cuyo caso devuelve verdadero.
 	private boolean allPathsClosed() {
 		boolean check = true;
 		for (int i = 0; i < possiblePaths_.size(); i++) {
@@ -125,7 +129,7 @@ public class AStarSearch {
 		}
 		return check;
 	}
-	
+	// Escribe en el fichero 'results.txt' los resultados de la ejecución del algoritmo.
 	public void writeResults() {
 		FileWriter fichero = null;
         PrintWriter pw = null;

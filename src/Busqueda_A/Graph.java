@@ -10,12 +10,15 @@ import java.util.ArrayList;
  * @author Sergio González Guerra
  *
  */
+// Clase que representa un Grafo no dirigido.
 public class Graph {
 	
-	private ArrayList<Node> nodes_ = new ArrayList<Node>();
-	private int nArches_;
-	public Graph(){}
+	private ArrayList<Node> nodes_ = new ArrayList<Node>();	// Guarda una Lista con todos los nodos del Grafo.
+	private int nArches_;									// Número total de arcos del Grafo.
 	
+	// Constructor vacío.
+	public Graph(){}
+	// Constructor que lee los ficheros y los interpreta para guardar la información del Grafo y sus Heurísticas.
 	public Graph(File archive1, File archive2) throws IOException {
 		FileReader fr1 = new FileReader(archive1);
 		BufferedReader br1 = new BufferedReader(fr1);
@@ -85,8 +88,9 @@ public class Graph {
 	// Setters 
 	public void addNode(Node node) { nodes_.add(node); }
 	
+	// Devuelve un String con el contenido de la clase.
 	public String toString() {
-		String cad="";
+		String cad="\\n\\n GRAFO\\n\\n";
 		for (int i = 0; i < nodes_.size(); i++) {
 			cad += nodes_.get(i).toString();
 		}
