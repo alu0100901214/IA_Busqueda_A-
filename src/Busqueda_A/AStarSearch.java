@@ -40,6 +40,10 @@ public class AStarSearch {
 		possiblePaths_.add(path);
 		generated_.add(nodeStart_);
 		
+		if(nodeStart_.getVal() == nodeEnd_.getVal()) {
+			possiblePaths_.get(0).setClosed(true);
+			solutions_.add(possiblePaths_.get(0));
+		}
 		aStar();
 	}
 	// Función encargada de ejecutar el algoritmo de búsqueda A*.

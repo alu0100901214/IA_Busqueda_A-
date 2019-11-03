@@ -1,8 +1,8 @@
 Nº nodos: 15
 Nº arcos: 19
 Nodo inicial: 1
-Nodo final: 8
-Camino minimo encontrado: 1 - 2 - 4 - 12 - 5 - 13 - 8 - 
-Coste minimo: 43.0
-Nº de nodos generados: 126
-Nº de nodos inspeccionados: 78
+Nodo final: 1
+Camino minimo encontrado: 1 - 
+Coste minimo: 0.0
+Nº de nodos generados: 1
+Nº de nodos inspeccionados: 0
