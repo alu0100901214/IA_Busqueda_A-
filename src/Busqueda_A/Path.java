@@ -64,7 +64,7 @@ public class Path {
 	}
 	
 	// Cuenta el número de sucesores del último nodo que se encuentran ya en el camino.
-	public int sucesorsInPath() {
+	private int sucesorsInPath() {
 		int count = 0;
 		for (int i = 0; i < nodes_.size(); i++) {
 			for (int j = 0; j < getLastPathNode().getArchesSize() ; j++) {
