@@ -27,7 +27,7 @@ public class AStarSearch {
 	ArrayList<Node> generated_ = new ArrayList<Node>();				// Guarda todos los nodos que se van generando.
 	ArrayList<Node> inspected_ = new ArrayList<Node>();				// Guarda todos los nodos que han sido inspeccionados.
 	
-	boolean foundLastNode_ = false;
+	boolean foundLastNode_ = false;	// MODIFICACIÓN: Booleano que indica si se ha encontrado el primer nodo final.
 	
 	private static final double Max = 9999999;
 	
