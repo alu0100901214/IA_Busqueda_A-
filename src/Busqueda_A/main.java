@@ -29,6 +29,7 @@ public class main {
 		AStarSearch as = new AStarSearch(archive1, archive2, start, end);
 		as.writeResults();
 		sc.close();
+		
 	}
 
 }
